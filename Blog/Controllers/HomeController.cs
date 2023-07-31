@@ -6,6 +6,12 @@ namespace Blog.Controllers
 {
     public class HomeController : Controller
     {
+        ModelDb ModelDb;
+        public HomeController(ModelDb modelDb)
+        {
+            ModelDb = modelDb;
+        }
+
         public ViewResult Index(string username,string password)
         {
            
