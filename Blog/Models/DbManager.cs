@@ -1,6 +1,7 @@
 ﻿using Blog.Db;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
+using NuGet.Protocol.Plugins;
 
 namespace Blog.Models
 {
@@ -12,32 +13,37 @@ namespace Blog.Models
         {
             this._context = context;
         }
-        public void addContenuto(string id, string titolo, string descrizione)
+        public void addContenuto(int id, string _titolo, string _descrizione)
         {
-            throw new NotImplementedException();
+            if (_titolo == null || _descrizione == null) return;
+            Contenuti c=new Contenuti{titolo=_titolo, descrizione=_descrizione, EF_idUtente=id};
+            this._context.contenuti.Add(c);
+            this._context.SaveChanges();
         }
 
         public void addUtente(string username, string password)
         {
-            throw new NotImplementedException();
+            if (username == null || password == null) return;
+            Console.WriteLine("CIAOOO");
         }
 
-        public IEnumerable<Contenuti>? get(string id)
+        public IEnumerable<Contenuti>? get(int id)
         {
-            return _context.contenuti.Where(x=>x.id==id).Select(x=>x);
+            return _context.contenuti.Where(x=>x.EF_idUtente==id);
 
         }
-        public Dictionary<string, IEnumerable<Contenuti>> get()
+        public Dictionary<int, IEnumerable<Contenuti>> get()
         {
-            Dictionary<string, IEnumerable<Contenuti>> r = new Dictionary<string, IEnumerable<Contenuti>>();
+            Dictionary<int, IEnumerable<Contenuti>> r = new Dictionary<int, IEnumerable<Contenuti>>();
             foreach (Utenti p in _context.utenti.Include(p => p.Id))
             {
                 r[p.Id] = get(p.Id);
             }
             return r;
         }
-        public string getId(string username, string password)
+        public int getId(string username, string password)
         {
+            if (username == null || password == null) return 0;
             var a=  _context.utenti.Where(p => (p.username == username && p.password == password)).Select(x => x.Id).FirstOrDefault();
             return a;
         }

@@ -1,10 +1,15 @@
 ﻿@using Blog.Db;
+@using System.Web;
+
 <!DOCTYPE html>
 <html>
 <head>
     <title>Display Person</title>
 </head>
 <body>
+
+    <h2>Ciao:@ViewBag.username</h2>
+    <div style ="float: left;">
     <table style="outline: thin solid">
         <tr>
             <th>
@@ -27,5 +32,17 @@
             </tr>
     }
     </table>
+    </div>
+    <div style="float: right;">
+        <form action="@Url.Action("addContenuti", "Blog")">
+            <label>Titolo</label>
+            <input type="text" name="titolo" id="titolo"/><br />
+            <label>Descrizione</label>
+            <input type="text" name="descrizione" id="descrizione"/><br />
+            <button type="submit">Save</button>
+        </form>
+
+
+    </div>
 </body>
 </html>

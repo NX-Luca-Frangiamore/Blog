@@ -4,10 +4,12 @@ namespace Blog.Db
 {
     public class Contenuti
     {
-        public string id { get; set; }
+      
+        public int id { get; set; }
         public string titolo { get; set; }
         public string descrizione { get; set; }
         
-        public string EF_idUtente { get; set; }
+        public int EF_idUtente { get; set; }
+       
     }
 }

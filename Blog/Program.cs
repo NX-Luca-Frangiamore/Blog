@@ -11,7 +11,7 @@ builder.Services.AddSqlite<Context>("Data Source=Context.db");
 builder.Services.AddScoped<ModelDb, DbManager>();
 builder.Services.AddDbContext<Blog.Db.Context>(options =>
   options.UseSqlServer(builder.Configuration.GetConnectionString("Context")));
-
+builder.Services.AddSession();
 
 builder.Services.AddControllersWithViews();
 
@@ -35,5 +35,5 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+app.UseSession();
 app.Run();
