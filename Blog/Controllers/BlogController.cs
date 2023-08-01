@@ -36,7 +36,7 @@ namespace Blog.Controllers
         }
 
         [Route("addContenuto")]
-        public IActionResult addContenuti(string titolo,string descrizione)
+        public async Task<IActionResult> addContenuti(string titolo,string descrizione)
         {
             string id = HttpContext.Session.GetString("id");
             db.addContenuto(Int32.Parse(id), titolo, descrizione);
@@ -45,13 +45,13 @@ namespace Blog.Controllers
          
         }
         [Route("addUtente")]
-        public IActionResult addUtente(string username, string password)
+        public async Task<IActionResult> addUtente(string username, string password)
         {
             db.addUtente(username,password);
             return RedirectToAction("", "Blog");
         }
         [Route("showRegister")]
-        public ViewResult showRegister() { return View(); }
+        public async Task<ViewResult> showRegister() { return View(); }
 
 
 
