@@ -20,7 +20,7 @@
             </th>
         </tr>
       
-    @foreach(Contenuti c in ViewBag.Contenuti)
+    @foreach(Contenuto c in ViewBag.Contenuti)
     {
             <tr>
                 <th>
@@ -34,14 +34,15 @@
     </table>
     </div>
     <div style="float: right;">
-        <form action="@Url.Action("addContenuti", "Blog")">
+        <form action="@Url.Action("addContenuto", "Blog")">
             <label>Titolo</label>
             <input type="text" name="titolo" id="titolo"/><br />
             <label>Descrizione</label>
             <input type="text" name="descrizione" id="descrizione"/><br />
             <button type="submit">Save</button>
         </form>
-
+        
+     
 
     </div>
 </body>

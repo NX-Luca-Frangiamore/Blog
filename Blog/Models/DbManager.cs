@@ -13,35 +13,38 @@ namespace Blog.Models
         {
             this._context = context;
         }
-        public void addContenuto(int id, string _titolo, string _descrizione)
+        public async void addContenuto(int id, string _titolo, string _descrizione)
         {
             if (_titolo == null || _descrizione == null) return;
-            Contenuti c=new Contenuti{titolo=_titolo, descrizione=_descrizione, EF_idUtente=id};
+            Contenuto c=new Contenuto{titolo=_titolo, descrizione=_descrizione, EF_idUtente=id};
             this._context.contenuti.Add(c);
             this._context.SaveChanges();
         }
 
-        public void addUtente(string username, string password)
+        public async void addUtente(string _username, string _password)
         {
-            if (username == null || password == null) return;
-            Console.WriteLine("CIAOOO");
+            if (_username == null || _password == null) return;
+            Utente utente=new Utente { username= _username, password = _password };
+            this._context.utenti.Add(utente);
+            this._context.SaveChanges();
         }
 
-        public IEnumerable<Contenuti>? get(int id)
+        public async Task<IEnumerable<Contenuto>?> get(int id)
         {
             return _context.contenuti.Where(x=>x.EF_idUtente==id);
 
         }
-        public Dictionary<int, IEnumerable<Contenuti>> get()
+        public async Task<Dictionary<int, IEnumerable<Contenuto>>> get()
         {
-            Dictionary<int, IEnumerable<Contenuti>> r = new Dictionary<int, IEnumerable<Contenuti>>();
-            foreach (Utenti p in _context.utenti.Include(p => p.Id))
+            Dictionary<int, IEnumerable<Contenuto>> r = new Dictionary<int, IEnumerable<Contenuto>>();
+            foreach (Utente p in _context.utenti.Include(p => p.Id))
             {
-                r[p.Id] = get(p.Id);
+
+                r[p.Id] = await get(p.Id);
             }
             return r;
         }
-        public int getId(string username, string password)
+        public async Task<int> getId(string username, string password)
         {
             if (username == null || password == null) return 0;
             var a=  _context.utenti.Where(p => (p.username == username && p.password == password)).Select(x => x.Id).FirstOrDefault();

@@ -2,7 +2,7 @@
 
 namespace Blog.Db
 {
-    public class Contenuti
+    public class Contenuto
     {
       
         public int id { get; set; }

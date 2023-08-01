@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<form method="post" action="\Blog">
+<form method="post" asp-action="" asp-controller="Blog">
     <label>Username:</label><br />
     <input type="text" name="username" id="username" /><br />
     <label>Password:</label><br />
@@ -10,3 +10,5 @@
     
     <input type="submit" />
 </form>
+
+<a asp-action="showRegister" asp-controller="Blog">Registrati</a>

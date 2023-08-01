@@ -1,6 +1,6 @@
 ﻿namespace Blog.Db
 {
-    public class Utenti
+    public class Utente
     {
         public int Id { get; set; }
         public string username { get; set; }

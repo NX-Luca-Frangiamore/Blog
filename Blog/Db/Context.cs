@@ -6,8 +6,8 @@ namespace Blog.Db
     {
         public Context(DbContextOptions<Context> options) : base(options) { }
        
-        public DbSet<Contenuti> contenuti=>Set<Contenuti>();
-        public DbSet<Utenti> utenti => Set<Utenti>();
+        public DbSet<Contenuto> contenuti=>Set<Contenuto>();
+        public DbSet<Utente> utenti => Set<Utente>();
 
 
     }
